@@ -1,0 +1,82 @@
+<div ng-controller="studentCntrl">
+
+<div class="container">
+<h4 style="color:#245580;">STUDENT APP</h4>
+<div class="row">
+    <div class="col-md-3"><label><small>STUDENT NAME</small></label></div>
+    <div class="col-md-2"><label><small>ROLL NUMBER</small></label></div>
+    <div class="col-md-2"><label><small>COURSE</small></label></div>
+    <div class="col-md-3"><label><small>EMAIL</small></label></div>
+</div>
+
+<div class="row">
+    <div class="col-md-3"><input class="form-control" ng-change="change()" type="text" ng-model="studentName" placeholder="Enter the student's name..."></td></div>
+    <div class="col-md-2"><input class="form-control" type="text" ng-model="rollNumber" placeholder="Roll number..."></div>
+    <div class="col-md-2"><input class="form-control" type="text" ng-model="course" placeholder="Course..."></div>
+    <div class="col-md-3"><input class="form-control" type="text" ng-model="email" placeholder="Email ID..."></div>
+    <div class="col-md-2"> 
+        <button class="btn btn-primary" ng-click="createstudent(studentName,rollNumber,course,email)" ng-show="isEditting">CREATE STUDENT</button>
+        <button class="btn btn-primary" ng-click="updatestudent(studentName,rollNumber,course,email)" ng-show="!isEditting">UPDATE</button>
+    </div>
+</div>
+
+<div style="margin-top: 2%;" class="alert alert-success alert-dismissable fade in" ng-show="isTrue">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>Look below ;) </strong> Your data is almost in, I'm just waiting for you to hit the button !
+</div>
+
+<div class="row" style="margin-top: 1%; margin-bottom: 1%;">
+    <div class="col-md-5">
+        <label><small>SEARCH A STUDENT INSTANTLY</small></label>
+        <input class="form-control" type="text" ng-model="$ctrl.query" placeholder="Type any name, roll number, email or course...">
+    </div>
+</div>
+
+<div ng-show="students.length > 0">
+<table class="table">
+    <thead>
+        <tr>
+            <th><small>STUDENT NAME</small></th>
+            <th><small>ROLL NUMBER</small></th>
+            <th><small>VIEW INFORMATION</small></th>
+            <th><small>EDIT</small></th>
+            <th><small>DELETE</small></th>
+            <th> </th>
+        </tr>
+    </thead>
+    <tbody ng-repeat="student in students | filter:$ctrl.query">
+        <tr >
+            <td>{{student.studentName}}</td>
+            <td>{{student.rollNumber}}</td>
+            <td><button class="btn btn-primary" data-toggle="collapse" data-target=".order1"  class="btn btn-primary" ng-click="show()" ng-show="!isShown"><small>SHOW DETAILS</small></button>
+                <button class="btn btn-primary" data-toggle="collapse" data-target=".order1"  class="btn btn-primary" ng-click="hide()" ng-show="isShown"><small>HIDE DETAILS</small></button>
+            </td>
+            <td><button class="btn btn-warning" ng-click="edit(student)"><small>EDIT</small></button></td>
+            <td><button class="btn btn-danger" ng-click="delete(student)"><small>DELETE</small></button></td>
+        </tr>
+        <tr class="collapse order1">
+            <td><b><small>COURSE</small></b></td>
+            <td>{{student.course}}</td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+        </tr>
+        <tr class="collapse order1">
+            <td><b><small>EMAIL ID</small></b></td>
+            <td>{{student.email}}</td>
+            <td></td>
+            <td></td>
+            <td> </td>
+            <td> </td>
+        </tr>
+    </tbody>
+    <tr ng-show="isTrue" class="success">
+        <td>{{studentName}}</td>
+        <td>{{rollNumber}}</td>
+        <td>{{course}}</td>
+        <td>{{email}}</td>
+        <td> </td>
+        <td> </td>
+    </tr>
+</table>
