@@ -8,8 +8,6 @@ To run this application, make sure your Mongo Server is running then open CMD an
 
 - cd studentApp
 
-- npm install
-
 - node server
 
 Now open browser and hit this URL: http://localhost:3000/
